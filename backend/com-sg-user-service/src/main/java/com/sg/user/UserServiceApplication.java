@@ -1,4 +1,4 @@
-package com.sg.user.service;
+package com.sg.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class UserServiceApplication {
 
 	public static void main(String[] args) {
-		System.err.println("started project!!!");
+		
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
