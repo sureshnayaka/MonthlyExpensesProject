@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+	
     // Handle Validation Errors (e.g., @Valid failing)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
@@ -33,7 +34,7 @@ public class GlobalExceptionHandler {
         ErrorResponse error = new ErrorResponse(400, "Validation Failed", details, "");
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
-
+    
     // Generic fallback for any other error
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobal(Exception ex, WebRequest request) {

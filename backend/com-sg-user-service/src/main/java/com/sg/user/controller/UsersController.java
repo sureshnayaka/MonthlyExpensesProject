@@ -1,35 +1,42 @@
 package com.sg.user.controller;
 
-import java.util.List;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sg.user.entity.Users;
-import com.sg.user.repository.UserRepository;
+import com.sg.user.dto.UserDto;
+import com.sg.user.serviceDB.UserServiceDB;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UsersController {
 
-	
-	private final UserRepository repository;
+	private final UserServiceDB userService;
 
-	public UsersController(UserRepository repository) {
-		this.repository = repository;
+	public UsersController(UserServiceDB userService) {
+		this.userService = userService;
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getUserById(@PathVariable Integer id) {
+
+		return userService.findUserById(id);
 	}
 
 	@GetMapping("/all")
-	public List<Users> getAllUsers() {
-		return repository.findAll();
+	public ResponseEntity<?> getAllUsers() {
+
+		return userService.findAllUser();
 	}
 
-	@PostMapping("/add")
-	public Users addUser(@RequestBody Users user) {
-		System.out.println(user);
-		return repository.save(user);
+	@PostMapping("/save")
+	public ResponseEntity<?> saveUsers(@RequestBody UserDto users) {
+
+		return userService.saveUser(users);
 	}
+
 }
